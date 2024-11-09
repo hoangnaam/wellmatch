@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import UserProfile from "./pages/UserProfile";
 import JobMatchDashboard from "./components/JobMatchDashboard";
+import CompanyProfile from "./pages/CompanyProfile";
 
 const queryClient = new QueryClient();
 
@@ -19,6 +20,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/matches" element={<JobMatchDashboard />} />
+          <Route path="/company/:id" element={<CompanyProfile />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
