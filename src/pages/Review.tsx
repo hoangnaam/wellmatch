@@ -1,15 +1,22 @@
 import { useParams, Navigate } from "react-router-dom";
+import { toast } from "sonner";
 import Navbar from "@/components/Navbar";
 import FeedbackSection from "@/components/FeedbackSection";
 
 const Review = () => {
   const { id } = useParams();
   
-  // TODO: In a real app, we would check if the user actually works at this company
+  // TODO: In a real app, we would fetch these from an API
   const userWorksAtCompany = true; // This should be replaced with actual authentication logic
+  const isEmployed = false; // This should come from user profile data
   
   if (!userWorksAtCompany) {
     return <Navigate to="/" replace />;
+  }
+
+  if (!isEmployed) {
+    toast.error("Reviews are only available for currently employed users");
+    return <Navigate to="/profile" replace />;
   }
 
   return (
