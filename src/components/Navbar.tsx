@@ -1,4 +1,4 @@
-import { Building, User, Briefcase, Users } from "lucide-react";
+import { User, Briefcase, Users, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -22,6 +22,10 @@ const Navbar = () => {
             <Link to="/community" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
               <Users size={20} />
               <span>Community</span>
+            </Link>
+            <Link to="/review/current-company" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
+              <Star size={20} />
+              <span>Review</span>
             </Link>
           </div>
 
