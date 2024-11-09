@@ -4,8 +4,11 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Star, Users, Heart, Info } from "lucide-react";
 import VirtualTourPreview from "@/components/VirtualTourPreview";
 import QASessionCalendar from "@/components/QASessionCalendar";
+import FeedbackSection from "@/components/FeedbackSection";
+import { useParams } from "react-router-dom";
 
 const CompanyProfile = () => {
+  const { id } = useParams();
   // Mock data for Q&A sessions
   const upcomingSessions = [
     {
@@ -37,13 +40,13 @@ const CompanyProfile = () => {
         </div>
       </div>
 
-      {/* Main Content */}
       <Tabs defaultValue="culture" className="space-y-6">
-        <TabsList className="grid w-full grid-cols-4 lg:w-[400px]">
+        <TabsList className="grid w-full grid-cols-5 lg:w-[500px]">
           <TabsTrigger value="culture">Culture</TabsTrigger>
           <TabsTrigger value="wellbeing">Well-being</TabsTrigger>
           <TabsTrigger value="reviews">Reviews</TabsTrigger>
           <TabsTrigger value="community">Community</TabsTrigger>
+          <TabsTrigger value="feedback">Feedback</TabsTrigger>
         </TabsList>
 
         <TabsContent value="culture" className="space-y-6">
@@ -148,6 +151,23 @@ const CompanyProfile = () => {
                 />
                 <QASessionCalendar upcomingSessions={upcomingSessions} />
               </div>
+            </CardContent>
+          </Card>
+        </TabsContent>
+
+        <TabsContent value="feedback">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Star className="h-5 w-5" />
+                Leave Feedback
+              </CardTitle>
+              <CardDescription>
+                Share your experience with this company
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <FeedbackSection companyId={id || ""} />
             </CardContent>
           </Card>
         </TabsContent>
