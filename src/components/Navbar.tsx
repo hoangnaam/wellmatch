@@ -1,4 +1,4 @@
-import { Building, User, Briefcase, Heart, MessageSquare, Users } from "lucide-react";
+import { Building, User, Briefcase, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -18,10 +18,6 @@ const Navbar = () => {
             <Link to="/matches" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
               <Briefcase size={20} />
               <span>Job Matches</span>
-            </Link>
-            <Link to="/mental-health" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
-              <Heart size={20} />
-              <span>Mental Health</span>
             </Link>
             <Link to="/community" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
               <Users size={20} />
