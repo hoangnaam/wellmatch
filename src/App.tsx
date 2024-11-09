@@ -7,7 +7,7 @@ import Index from "./pages/Index";
 import UserProfile from "./pages/UserProfile";
 import JobMatchDashboard from "./components/JobMatchDashboard";
 import CompanyProfile from "./pages/CompanyProfile";
-import CommunityForum from "./pages/CommunityForum";
+import NewsFeed from "./pages/NewsFeed";
 import EmployerDashboard from "./pages/employer/EmployerDashboard";
 import EmployerProfile from "./pages/employer/EmployerProfile";
 import ApplicationReceiver from "./pages/employer/ApplicationReceiver";
@@ -27,7 +27,7 @@ const App = () => (
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/matches" element={<JobMatchDashboard />} />
           <Route path="/company/:id" element={<CompanyProfile />} />
-          <Route path="/community" element={<CommunityForum />} />
+          <Route path="/news" element={<NewsFeed />} />
           <Route path="/review/:id" element={<Review />} />
           
           {/* Employer Routes */}

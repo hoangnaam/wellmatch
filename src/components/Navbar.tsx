@@ -1,4 +1,4 @@
-import { User, Briefcase, Users, Star } from "lucide-react";
+import { User, Briefcase, Newspaper, Star } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -19,9 +19,9 @@ const Navbar = () => {
               <Briefcase size={20} />
               <span>Job Matches</span>
             </Link>
-            <Link to="/community" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
-              <Users size={20} />
-              <span>Community</span>
+            <Link to="/news" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
+              <Newspaper size={20} />
+              <span>News</span>
             </Link>
             <Link to="/review/current-company" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
               <Star size={20} />
@@ -30,7 +30,6 @@ const Navbar = () => {
           </div>
 
           <div className="md:hidden">
-            {/* Mobile menu button - implement later */}
             <button className="text-wellmatch-dark">
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
