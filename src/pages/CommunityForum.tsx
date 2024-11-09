@@ -18,6 +18,7 @@ import {
 } from "lucide-react";
 import { ForumThread } from "@/components/ForumThread";
 import { useToast } from "@/components/ui/use-toast";
+import Navbar from "@/components/Navbar";
 
 const CommunityForum = () => {
   const [sortBy, setSortBy] = useState("recent");
@@ -55,7 +56,9 @@ const CommunityForum = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8 max-w-4xl">
       <div className="flex items-center justify-between mb-8">
         <div className="flex items-center space-x-2">
           <MessageSquare className="h-6 w-6 text-wellmatch-primary" />
@@ -99,7 +102,8 @@ const CommunityForum = () => {
           ))}
         </div>
       </ScrollArea>
-    </div>
+      </div>
+    </>
   );
 };
 

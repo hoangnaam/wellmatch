@@ -6,6 +6,7 @@ import VirtualTourPreview from "@/components/VirtualTourPreview";
 import QASessionCalendar from "@/components/QASessionCalendar";
 import FeedbackSection from "@/components/FeedbackSection";
 import { useParams } from "react-router-dom";
+import Navbar from "@/components/Navbar";
 
 const CompanyProfile = () => {
   const { id } = useParams();
@@ -24,7 +25,9 @@ const CompanyProfile = () => {
   ];
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
       {/* Hero Section */}
       <div className="relative h-64 mb-8 rounded-lg overflow-hidden">
         <img
@@ -172,7 +175,8 @@ const CompanyProfile = () => {
           </Card>
         </TabsContent>
       </Tabs>
-    </div>
+      </div>
+    </>
   );
 };
 

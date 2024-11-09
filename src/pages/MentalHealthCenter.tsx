@@ -5,12 +5,15 @@ import { Heart, Leaf, Trophy, Link as LinkIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import MentalHealthChallenge from "@/components/MentalHealthChallenge";
 import ResourceCard from "@/components/ResourceCard";
+import Navbar from "@/components/Navbar";
 
 const MentalHealthCenter = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-7xl">
+    <>
+      <Navbar />
+      <div className="container mx-auto px-4 py-8 max-w-7xl">
       {/* Hero Section */}
       <div className="relative h-64 mb-8 rounded-lg overflow-hidden">
         <img
@@ -121,7 +124,8 @@ const MentalHealthCenter = () => {
           </div>
         </TabsContent>
       </Tabs>
-    </div>
+      </div>
+    </>
   );
 };
 
