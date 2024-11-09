@@ -9,6 +9,10 @@ import JobMatchDashboard from "./components/JobMatchDashboard";
 import CompanyProfile from "./pages/CompanyProfile";
 import MentalHealthCenter from "./pages/MentalHealthCenter";
 import CommunityForum from "./pages/CommunityForum";
+import EmployerDashboard from "./pages/employer/EmployerDashboard";
+import EmployerProfile from "./pages/employer/EmployerProfile";
+import ApplicationReceiver from "./pages/employer/ApplicationReceiver";
+import Criteria from "./pages/employer/Criteria";
 
 const queryClient = new QueryClient();
 
@@ -25,6 +29,12 @@ const App = () => (
           <Route path="/company/:id" element={<CompanyProfile />} />
           <Route path="/mental-health" element={<MentalHealthCenter />} />
           <Route path="/community" element={<CommunityForum />} />
+          
+          {/* Employer Routes */}
+          <Route path="/employer" element={<EmployerDashboard />} />
+          <Route path="/employer/profile" element={<EmployerProfile />} />
+          <Route path="/employer/applications" element={<ApplicationReceiver />} />
+          <Route path="/employer/criteria" element={<Criteria />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
