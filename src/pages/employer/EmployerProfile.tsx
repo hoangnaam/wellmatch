@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import EmployerNavbar from "@/components/employer/EmployerNavbar";
-import { Building, Mail, Globe, MapPin } from "lucide-react";
+import { Building, Mail, Globe, MapPin, Users, Heart } from "lucide-react";
 
 const EmployerProfile = () => {
   return (
@@ -41,6 +41,24 @@ const EmployerProfile = () => {
             <div className="space-y-2">
               <label className="text-sm font-medium">Company Description</label>
               <Textarea className="min-h-[100px]" defaultValue="TechCorp Solutions is a leading provider of innovative software solutions..." />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Company Culture</label>
+              <Textarea 
+                className="min-h-[100px]" 
+                placeholder="Describe your company culture, values, and work environment..."
+                defaultValue="We foster an inclusive, innovative environment where creativity thrives. Our culture emphasizes work-life balance, continuous learning, and collaborative problem-solving. We celebrate diversity and encourage open communication at all levels."
+              />
+            </div>
+
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Ideal Candidate Profile</label>
+              <Textarea 
+                className="min-h-[100px]" 
+                placeholder="Describe the type of candidates you're looking for..."
+                defaultValue="We seek passionate individuals who are self-motivated and thrive in a fast-paced environment. Our ideal candidates demonstrate strong problem-solving abilities, embrace teamwork, and share our commitment to innovation. We value diversity of thought and experience, looking for people who can bring fresh perspectives to our team."
+              />
             </div>
 
             <Button className="w-full md:w-auto">Save Changes</Button>
