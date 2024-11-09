@@ -1,18 +1,20 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
 import EmployerNavbar from "@/components/employer/EmployerNavbar";
 import { Slider } from "@/components/ui/slider";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { FileText, Save, Plus, Trash2 } from "lucide-react";
+import { Save, Plus, Trash2 } from "lucide-react";
 import { useState } from "react";
+import TechnicalSkillsSection from "@/components/employer/criteria/TechnicalSkillsSection";
+import SoftSkillsSection from "@/components/employer/criteria/SoftSkillsSection";
+import MajorsSection from "@/components/employer/criteria/MajorsSection";
 
 interface CriteriaSheet {
   id: string;
   position: string;
   technicalSkills: string[];
   softSkills: string[];
+  majors: string[];
   experience: number;
   education: string[];
 }
@@ -25,6 +27,7 @@ const Criteria = () => {
       position: "Frontend Developer",
       technicalSkills: ["JavaScript", "React", "TypeScript"],
       softSkills: ["Teamwork", "Communication", "Problem Solving"],
+      majors: ["Computer Science", "Software Engineering"],
       experience: 3,
       education: ["Bachelor's Degree"]
     },
@@ -33,6 +36,7 @@ const Criteria = () => {
       position: "Backend Developer",
       technicalSkills: ["Node.js", "Python", "SQL"],
       softSkills: ["Leadership", "Time Management", "Adaptability"],
+      majors: ["Computer Science", "Information Technology"],
       experience: 4,
       education: ["Master's Degree"]
     }
@@ -44,6 +48,7 @@ const Criteria = () => {
       position: "New Position",
       technicalSkills: [],
       softSkills: [],
+      majors: [],
       experience: 0,
       education: []
     };
@@ -125,55 +130,9 @@ const Criteria = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
-                {/* Technical Skills Section */}
-                <div className="space-y-4">
-                  <h3 className="font-medium">Required Technical Skills</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="tech1" />
-                      <label htmlFor="tech1">JavaScript</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="tech2" />
-                      <label htmlFor="tech2">React</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="tech3" />
-                      <label htmlFor="tech3">Node.js</label>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Soft Skills Section */}
-                <div className="space-y-4">
-                  <h3 className="font-medium">Required Soft Skills</h3>
-                  <div className="grid md:grid-cols-3 gap-4">
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="soft1" />
-                      <label htmlFor="soft1">Teamwork</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="soft2" />
-                      <label htmlFor="soft2">Communication</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="soft3" />
-                      <label htmlFor="soft3">Problem Solving</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="soft4" />
-                      <label htmlFor="soft4">Leadership</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="soft5" />
-                      <label htmlFor="soft5">Time Management</label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Checkbox id="soft6" />
-                      <label htmlFor="soft6">Adaptability</label>
-                    </div>
-                  </div>
-                </div>
+                <TechnicalSkillsSection skills={currentSheet.technicalSkills} />
+                <SoftSkillsSection skills={currentSheet.softSkills} />
+                <MajorsSection majors={currentSheet.majors} />
 
                 <div className="space-y-4">
                   <h3 className="font-medium">Experience Level</h3>
