@@ -10,6 +10,7 @@ import TechnicalSkillsSection from "@/components/employer/criteria/TechnicalSkil
 import SoftSkillsSection from "@/components/employer/criteria/SoftSkillsSection";
 import MajorsSection from "@/components/employer/criteria/MajorsSection";
 import WorkEnvironmentSection from "@/components/employer/criteria/WorkEnvironmentSection";
+import SalarySection from "@/components/employer/criteria/SalarySection";
 
 interface CriteriaSheet {
   id: string;
@@ -20,6 +21,7 @@ interface CriteriaSheet {
   experience: number;
   education: string[];
   workEnvironments: string[];
+  salary: number[];
 }
 
 const Criteria = () => {
@@ -33,7 +35,8 @@ const Criteria = () => {
       majors: ["Computer Science", "Software Engineering"],
       experience: 3,
       education: ["Bachelor's Degree"],
-      workEnvironments: ["Remote Work", "Flexible Hours"]
+      workEnvironments: ["Remote Work", "Flexible Hours"],
+      salary: [80000]
     },
     {
       id: "2",
@@ -43,7 +46,8 @@ const Criteria = () => {
       majors: ["Computer Science", "Information Technology"],
       experience: 4,
       education: ["Master's Degree"],
-      workEnvironments: ["Hybrid", "Modern Office"]
+      workEnvironments: ["Hybrid", "Modern Office"],
+      salary: [90000]
     }
   ]);
 
@@ -56,7 +60,8 @@ const Criteria = () => {
       majors: [],
       experience: 0,
       education: [],
-      workEnvironments: []  // Added the missing property
+      workEnvironments: [],
+      salary: [60000]
     };
     setCriteriaSheets([...criteriaSheets, newSheet]);
     setSelectedPosition(newSheet.id);
@@ -136,6 +141,17 @@ const Criteria = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
+                <SalarySection 
+                  salary={currentSheet.salary}
+                  onSalaryChange={(value) => {
+                    const updatedSheets = criteriaSheets.map(sheet =>
+                      sheet.id === currentSheet.id
+                        ? { ...sheet, salary: value }
+                        : sheet
+                    );
+                    setCriteriaSheets(updatedSheets);
+                  }}
+                />
                 <TechnicalSkillsSection skills={currentSheet.technicalSkills} />
                 <SoftSkillsSection skills={currentSheet.softSkills} />
                 <MajorsSection majors={currentSheet.majors} />
