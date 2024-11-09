@@ -14,10 +14,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Textarea } from "@/components/ui/textarea";
-import { toast } from "@/components/ui/use-toast";
+import { toast } from "sonner";
 
 const formSchema = z.object({
-  rating: z.number().min(1).max(5),
+  rating: z.number().min(1, {
+    message: "Please select a rating.",
+  }).max(5),
   comment: z.string().min(10, {
     message: "Feedback must be at least 10 characters.",
   }),
@@ -35,11 +37,17 @@ const FeedbackSection = ({ companyId }: { companyId: string }) => {
   const [selectedRating, setSelectedRating] = React.useState(0);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    toast({
-      title: "Feedback Submitted",
-      description: "Thank you for sharing your experience!",
+    // Here you would typically make an API call to save the feedback
+    console.log("Submitting feedback:", values);
+    
+    // Show success toast
+    toast.success("Feedback submitted successfully!", {
+      description: "Thank you for sharing your experience!"
     });
-    console.log(values);
+    
+    // Reset form
+    form.reset();
+    setSelectedRating(0);
   }
 
   return (
