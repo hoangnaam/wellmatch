@@ -8,6 +8,7 @@ import UserProfile from "./pages/UserProfile";
 import JobMatchDashboard from "./components/JobMatchDashboard";
 import CompanyProfile from "./pages/CompanyProfile";
 import MentalHealthCenter from "./pages/MentalHealthCenter";
+import CommunityForum from "./pages/CommunityForum";
 
 const queryClient = new QueryClient();
 
@@ -23,6 +24,7 @@ const App = () => (
           <Route path="/matches" element={<JobMatchDashboard />} />
           <Route path="/company/:id" element={<CompanyProfile />} />
           <Route path="/mental-health" element={<MentalHealthCenter />} />
+          <Route path="/community" element={<CommunityForum />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
