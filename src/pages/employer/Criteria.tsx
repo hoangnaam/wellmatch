@@ -1,7 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";  // Add this import
+import { Checkbox } from "@/components/ui/checkbox";
 import EmployerNavbar from "@/components/employer/EmployerNavbar";
 import { Slider } from "@/components/ui/slider";
 import { Save, Plus, Trash2 } from "lucide-react";
@@ -9,6 +9,7 @@ import { useState } from "react";
 import TechnicalSkillsSection from "@/components/employer/criteria/TechnicalSkillsSection";
 import SoftSkillsSection from "@/components/employer/criteria/SoftSkillsSection";
 import MajorsSection from "@/components/employer/criteria/MajorsSection";
+import WorkEnvironmentSection from "@/components/employer/criteria/WorkEnvironmentSection";
 
 interface CriteriaSheet {
   id: string;
@@ -18,6 +19,7 @@ interface CriteriaSheet {
   majors: string[];
   experience: number;
   education: string[];
+  workEnvironments: string[];
 }
 
 const Criteria = () => {
@@ -30,7 +32,8 @@ const Criteria = () => {
       softSkills: ["Teamwork", "Communication", "Problem Solving"],
       majors: ["Computer Science", "Software Engineering"],
       experience: 3,
-      education: ["Bachelor's Degree"]
+      education: ["Bachelor's Degree"],
+      workEnvironments: ["Remote Work", "Flexible Hours"]
     },
     {
       id: "2",
@@ -39,7 +42,8 @@ const Criteria = () => {
       softSkills: ["Leadership", "Time Management", "Adaptability"],
       majors: ["Computer Science", "Information Technology"],
       experience: 4,
-      education: ["Master's Degree"]
+      education: ["Master's Degree"],
+      workEnvironments: ["Hybrid", "Modern Office"]
     }
   ]);
 
@@ -134,6 +138,7 @@ const Criteria = () => {
                 <TechnicalSkillsSection skills={currentSheet.technicalSkills} />
                 <SoftSkillsSection skills={currentSheet.softSkills} />
                 <MajorsSection majors={currentSheet.majors} />
+                <WorkEnvironmentSection environments={currentSheet.workEnvironments} />
 
                 <div className="space-y-4">
                   <h3 className="font-medium">Experience Level</h3>
