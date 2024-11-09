@@ -1,4 +1,4 @@
-import { User, Globe, Heart, Briefcase, Brain, Target } from "lucide-react";
+import { User, Heart, Briefcase, Brain, Target, Smile } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -8,7 +8,7 @@ import { toast } from "sonner";
 import ValueMatch from "@/components/ValueMatch";
 import Navbar from "@/components/Navbar";
 
-// Let's create some components to make the file smaller
+// Components split for better organization
 const PersonalInfo = ({ isEmployed, setIsEmployed }: { isEmployed: boolean; setIsEmployed: (value: boolean) => void }) => {
   const handleEmploymentChange = (checked: boolean) => {
     setIsEmployed(checked);
@@ -16,23 +16,27 @@ const PersonalInfo = ({ isEmployed, setIsEmployed }: { isEmployed: boolean; setI
   };
 
   return (
-    <div className="flex items-center space-x-6 mb-8">
-      <Avatar className="h-24 w-24">
-        <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>JD</AvatarFallback>
-      </Avatar>
-      <div className="flex-grow">
-        <h1 className="text-3xl font-bold text-wellmatch-dark">John Doe</h1>
-        <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <p className="text-wellmatch-accent">Software Engineer</p>
-            <Badge variant="outline" className={isEmployed ? "bg-green-50" : "bg-red-50"}>
-              {isEmployed ? "Employed" : "Unemployed"}
-            </Badge>
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-sm text-muted-foreground">Employment Status</span>
-            <Switch checked={isEmployed} onCheckedChange={handleEmploymentChange} />
+    <div className="relative bg-gradient-to-r from-wellmatch-primary/10 to-wellmatch-accent/10 rounded-xl p-8 mb-8">
+      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-6">
+        <Avatar className="h-32 w-32 ring-4 ring-wellmatch-primary/20">
+          <AvatarImage src="https://github.com/shadcn.png" />
+          <AvatarFallback>JD</AvatarFallback>
+        </Avatar>
+        <div className="flex-grow text-center md:text-left">
+          <h1 className="text-4xl font-bold text-wellmatch-dark mb-2 bg-clip-text text-transparent bg-gradient-to-r from-wellmatch-dark to-wellmatch-accent">
+            John Doe
+          </h1>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+            <div className="flex flex-wrap items-center gap-2">
+              <p className="text-wellmatch-accent font-medium">Software Engineer</p>
+              <Badge variant="outline" className={`${isEmployed ? "bg-green-50 text-green-600" : "bg-red-50 text-red-600"} animate-fadeIn`}>
+                {isEmployed ? "✨ Employed" : "🔍 Looking for opportunities"}
+              </Badge>
+            </div>
+            <div className="flex items-center space-x-2">
+              <span className="text-sm text-muted-foreground">Update Status</span>
+              <Switch checked={isEmployed} onCheckedChange={handleEmploymentChange} />
+            </div>
           </div>
         </div>
       </div>
@@ -41,45 +45,46 @@ const PersonalInfo = ({ isEmployed, setIsEmployed }: { isEmployed: boolean; setI
 };
 
 const PersonalDetails = () => (
-  <Card>
-    <CardHeader className="flex flex-row items-center space-x-2">
-      <User className="h-5 w-5 text-wellmatch-primary" />
-      <CardTitle>Personal Details</CardTitle>
+  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <CardHeader className="flex flex-row items-center space-x-2 bg-gradient-to-r from-wellmatch-primary/5 to-transparent">
+      <Smile className="h-5 w-5 text-wellmatch-primary animate-fadeIn" />
+      <CardTitle>About Me</CardTitle>
     </CardHeader>
-    <CardContent className="grid md:grid-cols-2 gap-4">
-      <div>
+    <CardContent className="grid md:grid-cols-2 gap-4 p-6">
+      <div className="space-y-2">
         <p className="text-sm text-muted-foreground">Email</p>
-        <p>john.doe@example.com</p>
+        <p className="font-medium">john.doe@example.com</p>
       </div>
-      <div>
+      <div className="space-y-2">
         <p className="text-sm text-muted-foreground">Location</p>
-        <p>San Francisco, CA</p>
+        <p className="font-medium">San Francisco, CA</p>
       </div>
     </CardContent>
   </Card>
 );
 
 const CulturalPreferences = () => (
-  <Card>
-    <CardHeader className="flex flex-row items-center space-x-2">
-      <Globe className="h-5 w-5 text-wellmatch-primary" />
-      <CardTitle>Cultural Preferences</CardTitle>
+  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <CardHeader className="flex flex-row items-center space-x-2 bg-gradient-to-r from-wellmatch-primary/5 to-transparent">
+      <Heart className="h-5 w-5 text-wellmatch-primary animate-fadeIn" />
+      <CardTitle>My Vibe</CardTitle>
     </CardHeader>
-    <CardContent className="space-y-4">
+    <CardContent className="space-y-6 p-6">
       <div>
-        <h3 className="font-medium mb-2">Work Environment</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <ValueMatch percentage={85} />
-          <p className="text-sm">Remote-first</p>
-          <p className="text-sm">Collaborative</p>
-        </div>
-      </div>
-      <div>
-        <h3 className="font-medium mb-2">Communication Style</h3>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <ValueMatch percentage={90} />
-          <p className="text-sm">Direct</p>
-          <p className="text-sm">Transparent</p>
+        <h3 className="font-medium mb-4 text-lg">Work Environment</h3>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="bg-wellmatch-secondary/10 p-4 rounded-lg">
+            <ValueMatch percentage={85} />
+            <p className="text-sm mt-2 font-medium">Remote-first</p>
+          </div>
+          <div className="bg-wellmatch-secondary/10 p-4 rounded-lg">
+            <ValueMatch percentage={92} />
+            <p className="text-sm mt-2 font-medium">Collaborative</p>
+          </div>
+          <div className="bg-wellmatch-secondary/10 p-4 rounded-lg">
+            <ValueMatch percentage={88} />
+            <p className="text-sm mt-2 font-medium">Innovative</p>
+          </div>
         </div>
       </div>
     </CardContent>
@@ -87,23 +92,23 @@ const CulturalPreferences = () => (
 );
 
 const WellbeingGoals = () => (
-  <Card>
-    <CardHeader className="flex flex-row items-center space-x-2">
-      <Heart className="h-5 w-5 text-wellmatch-primary" />
-      <CardTitle>Well-being Goals</CardTitle>
+  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <CardHeader className="flex flex-row items-center space-x-2 bg-gradient-to-r from-wellmatch-primary/5 to-transparent">
+      <Heart className="h-5 w-5 text-wellmatch-primary animate-fadeIn" />
+      <CardTitle>Life Goals</CardTitle>
     </CardHeader>
-    <CardContent className="space-y-4">
+    <CardContent className="p-6">
       <div className="grid md:grid-cols-3 gap-4">
-        <div className="p-4 bg-wellmatch-secondary/20 rounded-lg">
+        <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
           <h3 className="font-medium mb-2">Work-Life Balance</h3>
           <ValueMatch percentage={95} />
         </div>
-        <div className="p-4 bg-wellmatch-secondary/20 rounded-lg">
-          <h3 className="font-medium mb-2">Mental Health Support</h3>
+        <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
+          <h3 className="font-medium mb-2">Mental Health</h3>
           <ValueMatch percentage={80} />
         </div>
-        <div className="p-4 bg-wellmatch-secondary/20 rounded-lg">
-          <h3 className="font-medium mb-2">Professional Growth</h3>
+        <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
+          <h3 className="font-medium mb-2">Growth</h3>
           <ValueMatch percentage={88} />
         </div>
       </div>
@@ -112,19 +117,19 @@ const WellbeingGoals = () => (
 );
 
 const JobExperiences = () => (
-  <Card>
-    <CardHeader className="flex flex-row items-center space-x-2">
-      <Briefcase className="h-5 w-5 text-wellmatch-primary" />
-      <CardTitle>Past Job Experiences</CardTitle>
+  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <CardHeader className="flex flex-row items-center space-x-2 bg-gradient-to-r from-wellmatch-primary/5 to-transparent">
+      <Briefcase className="h-5 w-5 text-wellmatch-primary animate-fadeIn" />
+      <CardTitle>Experience</CardTitle>
     </CardHeader>
-    <CardContent className="space-y-6">
-      <div className="border-l-2 border-wellmatch-primary pl-4">
-        <h3 className="font-medium">Senior Software Engineer</h3>
+    <CardContent className="space-y-6 p-6">
+      <div className="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-gradient-to-b before:from-wellmatch-primary before:to-wellmatch-accent">
+        <h3 className="font-medium text-lg">Senior Software Engineer</h3>
         <p className="text-sm text-muted-foreground">TechCorp Inc. • 2020-2023</p>
         <p className="mt-2">Led development of core platform features and mentored junior developers.</p>
       </div>
-      <div className="border-l-2 border-wellmatch-primary pl-4">
-        <h3 className="font-medium">Software Engineer</h3>
+      <div className="relative pl-4 before:content-[''] before:absolute before:left-0 before:top-0 before:bottom-0 before:w-0.5 before:bg-gradient-to-b before:from-wellmatch-primary before:to-wellmatch-accent">
+        <h3 className="font-medium text-lg">Software Engineer</h3>
         <p className="text-sm text-muted-foreground">StartupXYZ • 2018-2020</p>
         <p className="mt-2">Full-stack development for a growing SaaS platform.</p>
       </div>
@@ -133,20 +138,20 @@ const JobExperiences = () => (
 );
 
 const PsychologicalAssessments = () => (
-  <Card>
-    <CardHeader className="flex flex-row items-center space-x-2">
-      <Brain className="h-5 w-5 text-wellmatch-primary" />
-      <CardTitle>Psychological Assessments</CardTitle>
+  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <CardHeader className="flex flex-row items-center space-x-2 bg-gradient-to-r from-wellmatch-primary/5 to-transparent">
+      <Brain className="h-5 w-5 text-wellmatch-primary animate-fadeIn" />
+      <CardTitle>My Personality</CardTitle>
     </CardHeader>
-    <CardContent className="grid md:grid-cols-2 gap-6">
-      <div>
+    <CardContent className="grid md:grid-cols-2 gap-6 p-6">
+      <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
         <h3 className="font-medium mb-2">Personality Type</h3>
-        <p className="text-2xl font-semibold text-wellmatch-accent">INFJ-T</p>
+        <p className="text-3xl font-bold text-wellmatch-accent">INFJ-T</p>
         <p className="text-sm text-muted-foreground mt-1">The Advocate</p>
       </div>
-      <div>
+      <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
         <h3 className="font-medium mb-2">Work Style</h3>
-        <p className="text-2xl font-semibold text-wellmatch-accent">Strategic Thinker</p>
+        <p className="text-3xl font-bold text-wellmatch-accent">Strategic</p>
         <p className="text-sm text-muted-foreground mt-1">Analytical & Detail-oriented</p>
       </div>
     </CardContent>
@@ -154,22 +159,22 @@ const PsychologicalAssessments = () => (
 );
 
 const ValueIndicators = () => (
-  <Card>
-    <CardHeader className="flex flex-row items-center space-x-2">
-      <Target className="h-5 w-5 text-wellmatch-primary" />
-      <CardTitle>Value Indicators</CardTitle>
+  <Card className="overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <CardHeader className="flex flex-row items-center space-x-2 bg-gradient-to-r from-wellmatch-primary/5 to-transparent">
+      <Target className="h-5 w-5 text-wellmatch-primary animate-fadeIn" />
+      <CardTitle>My Values</CardTitle>
     </CardHeader>
-    <CardContent className="space-y-4">
+    <CardContent className="p-6">
       <div className="grid md:grid-cols-3 gap-4">
-        <div>
+        <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
           <h3 className="font-medium mb-2">Innovation</h3>
           <ValueMatch percentage={92} />
         </div>
-        <div>
+        <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
           <h3 className="font-medium mb-2">Collaboration</h3>
           <ValueMatch percentage={88} />
         </div>
-        <div>
+        <div className="bg-gradient-to-br from-wellmatch-secondary/20 to-wellmatch-primary/10 p-6 rounded-xl">
           <h3 className="font-medium mb-2">Work-Life Balance</h3>
           <ValueMatch percentage={95} />
         </div>
@@ -186,12 +191,14 @@ const UserProfile = () => {
       <Navbar />
       <div className="container mx-auto px-4 py-24 space-y-8 animate-fadeIn">
         <PersonalInfo isEmployed={isEmployed} setIsEmployed={setIsEmployed} />
-        <PersonalDetails />
-        <CulturalPreferences />
-        <WellbeingGoals />
-        <JobExperiences />
-        <PsychologicalAssessments />
-        <ValueIndicators />
+        <div className="grid gap-8">
+          <PersonalDetails />
+          <CulturalPreferences />
+          <WellbeingGoals />
+          <JobExperiences />
+          <PsychologicalAssessments />
+          <ValueIndicators />
+        </div>
       </div>
     </>
   );
