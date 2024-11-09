@@ -152,7 +152,7 @@ const Criteria = () => {
                     </div>
                     <div className="flex items-center space-x-2">
                       <Checkbox id="edu2" />
-                      <label htmlFor="edu2">Master's Degree</label>
+                      <label htmlFor="edu2">Master's Degree or above</label>
                     </div>
                   </div>
                 </div>
