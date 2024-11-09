@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   HoverCard,
@@ -9,6 +9,8 @@ import { toast } from "@/components/ui/use-toast";
 import { CheckSquare, XSquare, Info, Filter } from "lucide-react";
 import JobCard from "./JobCard";
 import Navbar from "./Navbar";
+import { Slider } from "@/components/ui/slider";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -17,155 +19,205 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface JobMatch {
-  id: string;
-  title: string;
-  company: string;
-  location: string;
-  description: string;
-  cultureHighlights: string[];
-  compatibilityFactors: {
-    factor: string;
-    score: number;
-    description: string;
-  }[];
-  overallMatch: number;
-  values: string[];
-}
-
 const JobMatchDashboard = () => {
-  const jobMatches: JobMatch[] = [
-    {
-      id: "1",
-      title: "Senior Software Engineer",
-      company: "Mindful Tech Co",
-      location: "Remote",
-      description: "Join our team focused on building wellness applications...",
-      cultureHighlights: [
-        "Flexible work hours",
-        "Mental health days",
-        "Wellness programs",
-      ],
-      compatibilityFactors: [
-        {
-          factor: "Work-Life Balance",
-          score: 95,
-          description: "Strong alignment with your preferred work-life balance",
-        },
-        {
-          factor: "Company Values",
-          score: 88,
-          description: "Shared emphasis on employee well-being and growth",
-        },
-      ],
-      overallMatch: 92,
-      values: ["Work-Life Balance", "Innovation", "Wellness"],
-    },
+  const [salary, setSalary] = useState([50000]);
+  const [selectedQualification, setSelectedQualification] = useState("");
+  const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
+  const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
+  const [selectedEnvironment, setSelectedEnvironment] = useState<string[]>([]);
+
+  const qualifications = [
+    "Medical Doctor",
+    "Electronic Engineer",
+    "Software Engineer",
+    "Data Scientist",
+    "Business Analyst",
+    "Marketing Specialist",
+    "Graphic Designer",
   ];
 
-  const handleSaveJob = (jobId: string) => {
-    toast({
-      title: "Job Saved",
-      description: "This job has been saved to your profile",
-    });
-  };
+  const personalityTraits = [
+    "Team Player",
+    "Independent Worker",
+    "Creative Thinker",
+    "Analytical Mind",
+    "Leadership Skills",
+    "Communication Skills",
+    "Problem Solver",
+    "Detail-Oriented",
+  ];
 
-  const handleDismissJob = (jobId: string) => {
-    toast({
-      title: "Job Dismissed",
-      description: "This job won't appear in your matches anymore",
-    });
-  };
+  const hobbies = [
+    "Classical Music",
+    "Rock Music",
+    "Jazz",
+    "Soccer",
+    "Basketball",
+    "Tennis",
+    "Reading",
+    "Photography",
+    "Traveling",
+    "Cooking",
+  ];
+
+  const workEnvironments = [
+    "Green Space",
+    "Open Floor Plan",
+    "Private Offices",
+    "Natural Lighting",
+    "Quiet Zones",
+    "Collaboration Areas",
+    "Outdoor Workspace",
+    "Modern Tech Setup",
+  ];
 
   return (
     <>
       <Navbar />
       <div className="container mx-auto px-4 py-8">
-        <div className="flex justify-between items-center mb-8">
-          <h1 className="text-3xl font-bold text-wellmatch-dark">Your Job Matches</h1>
-          <div className="flex items-center space-x-4">
-            <Select defaultValue="recent">
-              <SelectTrigger className="w-[180px]">
-                <Filter className="mr-2 h-4 w-4" />
-                <SelectValue placeholder="Sort by" />
+        <h1 className="text-3xl font-bold text-wellmatch-dark mb-8">Job Preference Settings</h1>
+        
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Qualification Section */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4 text-wellmatch-dark">Qualification</h2>
+            <Select
+              value={selectedQualification}
+              onValueChange={setSelectedQualification}
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select your qualification" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="recent">Most Recent</SelectItem>
-                <SelectItem value="match">Best Match</SelectItem>
-                <SelectItem value="company">Company Name</SelectItem>
+                {qualifications.map((qual) => (
+                  <SelectItem key={qual} value={qual}>
+                    {qual}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
-        </div>
-        
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {jobMatches.map((match) => (
-            <div key={match.id} className="relative">
-              <JobCard
-                title={match.title}
-                company={match.company}
-                location={match.location}
-                matchPercentage={match.overallMatch}
-                values={match.values}
+
+          {/* Salary Section */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4 text-wellmatch-dark">Salary Expectation</h2>
+            <div className="space-y-4">
+              <Slider
+                value={salary}
+                onValueChange={setSalary}
+                max={200000}
+                step={1000}
+                className="w-full"
               />
-              
-              <div className="mt-4 space-y-2">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <HoverCard>
-                      <HoverCardTrigger asChild>
-                        <Button variant="ghost" size="sm" className="p-0">
-                          <Info className="h-4 w-4 text-wellmatch-accent" />
-                        </Button>
-                      </HoverCardTrigger>
-                      <HoverCardContent className="w-80">
-                        <div className="space-y-2">
-                          <h4 className="text-sm font-semibold">Compatibility Breakdown</h4>
-                          {match.compatibilityFactors.map((factor, index) => (
-                            <div key={index} className="space-y-1">
-                              <div className="flex justify-between text-sm">
-                                <span>{factor.factor}</span>
-                                <span className="font-medium">{factor.score}%</span>
-                              </div>
-                              <p className="text-xs text-muted-foreground">{factor.description}</p>
-                            </div>
-                          ))}
-                        </div>
-                      </HoverCardContent>
-                    </HoverCard>
-                  </div>
-                  
-                  <div className="flex space-x-2">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleSaveJob(match.id)}
-                      className="text-wellmatch-primary hover:text-wellmatch-primary/80"
-                    >
-                      <CheckSquare className="h-5 w-5" />
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={() => handleDismissJob(match.id)}
-                      className="text-wellmatch-dark hover:text-wellmatch-dark/80"
-                    >
-                      <XSquare className="h-5 w-5" />
-                    </Button>
-                  </div>
-                </div>
-                
-                <div className="text-sm text-gray-600">
-                  <h4 className="font-medium mb-1">Culture Highlights:</h4>
-                  <ul className="list-disc list-inside">
-                    {match.cultureHighlights.map((highlight, index) => (
-                      <li key={index}>{highlight}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+              <p className="text-center text-wellmatch-dark">
+                ${salary[0].toLocaleString()} per year
+              </p>
             </div>
-          ))}
+          </div>
+
+          {/* Skills Section */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4 text-wellmatch-dark">Skills & Personality</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {personalityTraits.map((trait) => (
+                <div key={trait} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={trait}
+                    checked={selectedSkills.includes(trait)}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setSelectedSkills([...selectedSkills, trait]);
+                      } else {
+                        setSelectedSkills(selectedSkills.filter((t) => t !== trait));
+                      }
+                    }}
+                  />
+                  <label htmlFor={trait} className="text-sm cursor-pointer">
+                    {trait}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Hobbies Section */}
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <h2 className="text-xl font-semibold mb-4 text-wellmatch-dark">Personal Hobbies</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {hobbies.map((hobby) => (
+                <div key={hobby} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={hobby}
+                    checked={selectedHobbies.includes(hobby)}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setSelectedHobbies([...selectedHobbies, hobby]);
+                      } else {
+                        setSelectedHobbies(selectedHobbies.filter((h) => h !== hobby));
+                      }
+                    }}
+                  />
+                  <label htmlFor={hobby} className="text-sm cursor-pointer">
+                    {hobby}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Working Environment Section */}
+          <div className="bg-white p-6 rounded-lg shadow-md col-span-2">
+            <h2 className="text-xl font-semibold mb-4 text-wellmatch-dark">Working Environment</h2>
+            <div className="grid grid-cols-3 gap-4">
+              {workEnvironments.map((env) => (
+                <div key={env} className="flex items-center space-x-2">
+                  <Checkbox
+                    id={env}
+                    checked={selectedEnvironment.includes(env)}
+                    onCheckedChange={(checked) => {
+                      if (checked) {
+                        setSelectedEnvironment([...selectedEnvironment, env]);
+                      } else {
+                        setSelectedEnvironment(selectedEnvironment.filter((e) => e !== env));
+                      }
+                    }}
+                  />
+                  <label htmlFor={env} className="text-sm cursor-pointer">
+                    {env}
+                  </label>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-8 flex justify-end">
+          <Button 
+            onClick={() => toast({
+              title: "Preferences Saved",
+              description: "Your job preferences have been updated successfully."
+            })}
+            className="bg-wellmatch-primary hover:bg-wellmatch-accent text-white"
+          >
+            Save Preferences
+          </Button>
+        </div>
+
+        {/* Original job matches section */}
+        <div className="mt-12">
+          <h2 className="text-2xl font-bold text-wellmatch-dark mb-6">Matching Jobs</h2>
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {/* Example job card */}
+            <div className="relative">
+              <JobCard
+                title="Senior Software Engineer"
+                company="Mindful Tech Co"
+                location="Remote"
+                matchPercentage={92}
+                values={["Work-Life Balance", "Innovation", "Wellness"]}
+              />
+            </div>
+          </div>
         </div>
       </div>
     </>
