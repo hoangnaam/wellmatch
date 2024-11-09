@@ -1,23 +1,13 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  HoverCard,
-  HoverCardContent,
-  HoverCardTrigger,
-} from "@/components/ui/hover-card";
 import { toast } from "@/components/ui/use-toast";
-import { CheckSquare, XSquare, Info, Filter } from "lucide-react";
 import JobCard from "./JobCard";
 import Navbar from "./Navbar";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import SalarySection from "./job-match/SalarySection";
+import ManagerPreferencesSection from "./job-match/ManagerPreferencesSection";
 import { Slider } from "@/components/ui/slider";
 import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 const JobMatchDashboard = () => {
   const [salary, setSalary] = useState([50000]);
@@ -25,6 +15,7 @@ const JobMatchDashboard = () => {
   const [selectedSkills, setSelectedSkills] = useState<string[]>([]);
   const [selectedHobbies, setSelectedHobbies] = useState<string[]>([]);
   const [selectedEnvironment, setSelectedEnvironment] = useState<string[]>([]);
+  const [selectedManagerStyles, setSelectedManagerStyles] = useState<string[]>([]);
 
   const qualifications = [
     "Medical Doctor",
@@ -71,6 +62,12 @@ const JobMatchDashboard = () => {
     "Modern Tech Setup",
   ];
 
+  const handleManagerStyleChange = (style: string, checked: boolean) => {
+    setSelectedManagerStyles(prev =>
+      checked ? [...prev, style] : prev.filter(s => s !== style)
+    );
+  };
+
   return (
     <>
       <Navbar />
@@ -99,21 +96,13 @@ const JobMatchDashboard = () => {
           </div>
 
           {/* Salary Section */}
-          <div className="bg-white p-6 rounded-lg shadow-md">
-            <h2 className="text-xl font-semibold mb-4 text-wellmatch-dark">Salary Expectation</h2>
-            <div className="space-y-4">
-              <Slider
-                value={salary}
-                onValueChange={setSalary}
-                max={200000}
-                step={1000}
-                className="w-full"
-              />
-              <p className="text-center text-wellmatch-dark">
-                ${salary[0].toLocaleString()} per year
-              </p>
-            </div>
-          </div>
+          <SalarySection salary={salary} onSalaryChange={setSalary} />
+
+          {/* Manager Preferences Section */}
+          <ManagerPreferencesSection 
+            selectedStyles={selectedManagerStyles}
+            onStyleChange={handleManagerStyleChange}
+          />
 
           {/* Skills Section */}
           <div className="bg-white p-6 rounded-lg shadow-md">
