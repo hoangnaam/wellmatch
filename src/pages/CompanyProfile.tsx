@@ -1,21 +1,24 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/components/ui/use-toast";
-import { Star, Users, Heart, Video, MessageSquare, Camera, Play, Info } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { Star, Users, Heart, Info } from "lucide-react";
+import VirtualTourPreview from "@/components/VirtualTourPreview";
+import QASessionCalendar from "@/components/QASessionCalendar";
 
 const CompanyProfile = () => {
-  const { toast } = useToast();
-  const [activeTab, setActiveTab] = useState("culture");
-
-  const handleJoinQA = () => {
-    toast({
-      title: "Q&A Session",
-      description: "You'll be notified when the next Q&A session begins.",
-    });
-  };
+  // Mock data for Q&A sessions
+  const upcomingSessions = [
+    {
+      date: new Date(),
+      topic: "Company Culture Q&A",
+      host: "HR Director",
+    },
+    {
+      date: new Date(Date.now() + 86400000), // Tomorrow
+      topic: "Team Lead Meet & Greet",
+      host: "Engineering Lead",
+    },
+  ];
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-7xl">
@@ -130,50 +133,20 @@ const CompanyProfile = () => {
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
-                <MessageSquare className="h-5 w-5" />
-                Community Engagement
+                <Info className="h-5 w-5" />
+                Interactive Features
               </CardTitle>
+              <CardDescription>
+                Experience our workplace and connect with our team
+              </CardDescription>
             </CardHeader>
-            <CardContent className="space-y-6">
-              {/* Interactive Features */}
+            <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="border rounded-lg p-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Camera className="h-5 w-5" />
-                    <h3 className="font-semibold">Virtual Office Tour</h3>
-                  </div>
-                  <div className="aspect-video bg-gray-100 rounded-lg mb-4 flex items-center justify-center">
-                    <Play className="h-12 w-12 text-gray-400" />
-                  </div>
-                  <Button className="w-full">Start VR Tour</Button>
-                </div>
-
-                <div className="border rounded-lg p-4">
-                  <div className="flex items-center gap-2 mb-4">
-                    <Video className="h-5 w-5" />
-                    <h3 className="font-semibold">Live Q&A Sessions</h3>
-                  </div>
-                  <p className="text-gray-600 mb-4">
-                    Join our weekly Q&A sessions with team members and leadership.
-                  </p>
-                  <Button onClick={handleJoinQA} className="w-full">Join Next Session</Button>
-                </div>
-              </div>
-
-              {/* Employee Content */}
-              <div className="border rounded-lg p-4">
-                <h3 className="font-semibold mb-4">Employee Stories</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  {[1, 2, 3].map((story) => (
-                    <div key={story} className="space-y-2">
-                      <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                        <Play className="h-8 w-8 text-gray-400" />
-                      </div>
-                      <p className="text-sm font-medium">Employee Story #{story}</p>
-                      <p className="text-xs text-gray-500">2 minutes</p>
-                    </div>
-                  ))}
-                </div>
+                <VirtualTourPreview 
+                  companyName="TechWell Solutions"
+                  previewImageUrl="https://images.unsplash.com/photo-1497366216548-37526070297c"
+                />
+                <QASessionCalendar upcomingSessions={upcomingSessions} />
               </div>
             </CardContent>
           </Card>
