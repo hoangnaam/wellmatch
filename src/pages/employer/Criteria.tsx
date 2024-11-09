@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Checkbox } from "@/components/ui/checkbox";  // Add this import
 import EmployerNavbar from "@/components/employer/EmployerNavbar";
 import { Slider } from "@/components/ui/slider";
 import { Save, Plus, Trash2 } from "lucide-react";
