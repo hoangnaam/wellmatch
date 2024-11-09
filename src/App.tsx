@@ -12,6 +12,7 @@ import EmployerDashboard from "./pages/employer/EmployerDashboard";
 import EmployerProfile from "./pages/employer/EmployerProfile";
 import ApplicationReceiver from "./pages/employer/ApplicationReceiver";
 import Criteria from "./pages/employer/Criteria";
+import Review from "./pages/Review";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/matches" element={<JobMatchDashboard />} />
           <Route path="/company/:id" element={<CompanyProfile />} />
           <Route path="/community" element={<CommunityForum />} />
+          <Route path="/review/:id" element={<Review />} />
           
           {/* Employer Routes */}
           <Route path="/employer" element={<EmployerDashboard />} />
