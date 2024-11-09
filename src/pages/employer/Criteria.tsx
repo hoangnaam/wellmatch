@@ -55,7 +55,8 @@ const Criteria = () => {
       softSkills: [],
       majors: [],
       experience: 0,
-      education: []
+      education: [],
+      workEnvironments: []  // Added the missing property
     };
     setCriteriaSheets([...criteriaSheets, newSheet]);
     setSelectedPosition(newSheet.id);
