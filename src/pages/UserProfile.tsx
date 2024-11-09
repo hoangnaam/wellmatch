@@ -2,27 +2,43 @@ import { User, Globe, Heart, Briefcase, Brain, Target } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
+import { useState } from "react";
+import { toast } from "sonner";
 import ValueMatch from "@/components/ValueMatch";
 import Navbar from "@/components/Navbar";
 
 // Let's create some components to make the file smaller
-const PersonalInfo = () => (
-  <div className="flex items-center space-x-6 mb-8">
-    <Avatar className="h-24 w-24">
-      <AvatarImage src="https://github.com/shadcn.png" />
-      <AvatarFallback>JD</AvatarFallback>
-    </Avatar>
-    <div>
-      <h1 className="text-3xl font-bold text-wellmatch-dark">John Doe</h1>
-      <div className="flex items-center space-x-2">
-        <p className="text-wellmatch-accent">Software Engineer</p>
-        <Badge variant="outline" className="bg-green-50">
-          Employed
-        </Badge>
+const PersonalInfo = ({ isEmployed, setIsEmployed }: { isEmployed: boolean; setIsEmployed: (value: boolean) => void }) => {
+  const handleEmploymentChange = (checked: boolean) => {
+    setIsEmployed(checked);
+    toast.success(`Status updated to ${checked ? 'Employed' : 'Unemployed'}`);
+  };
+
+  return (
+    <div className="flex items-center space-x-6 mb-8">
+      <Avatar className="h-24 w-24">
+        <AvatarImage src="https://github.com/shadcn.png" />
+        <AvatarFallback>JD</AvatarFallback>
+      </Avatar>
+      <div className="flex-grow">
+        <h1 className="text-3xl font-bold text-wellmatch-dark">John Doe</h1>
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-2">
+            <p className="text-wellmatch-accent">Software Engineer</p>
+            <Badge variant="outline" className={isEmployed ? "bg-green-50" : "bg-red-50"}>
+              {isEmployed ? "Employed" : "Unemployed"}
+            </Badge>
+          </div>
+          <div className="flex items-center space-x-2">
+            <span className="text-sm text-muted-foreground">Employment Status</span>
+            <Switch checked={isEmployed} onCheckedChange={handleEmploymentChange} />
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
 
 const PersonalDetails = () => (
   <Card>
@@ -163,11 +179,13 @@ const ValueIndicators = () => (
 );
 
 const UserProfile = () => {
+  const [isEmployed, setIsEmployed] = useState(true);
+
   return (
     <>
       <Navbar />
       <div className="container mx-auto px-4 py-24 space-y-8 animate-fadeIn">
-        <PersonalInfo />
+        <PersonalInfo isEmployed={isEmployed} setIsEmployed={setIsEmployed} />
         <PersonalDetails />
         <CulturalPreferences />
         <WellbeingGoals />
