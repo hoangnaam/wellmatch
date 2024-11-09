@@ -1,4 +1,4 @@
-import { Building, User, Search, MessageSquare } from "lucide-react";
+import { Building, User, Briefcase, Heart, MessageSquare, Users } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
@@ -15,17 +15,17 @@ const Navbar = () => {
               <User size={20} />
               <span>Profile</span>
             </Link>
-            <Link to="/jobs" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
-              <Search size={20} />
-              <span>Find Jobs</span>
+            <Link to="/matches" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
+              <Briefcase size={20} />
+              <span>Job Matches</span>
             </Link>
-            <Link to="/companies" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
-              <Building size={20} />
-              <span>Companies</span>
+            <Link to="/mental-health" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
+              <Heart size={20} />
+              <span>Mental Health</span>
             </Link>
-            <Link to="/messages" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
-              <MessageSquare size={20} />
-              <span>Messages</span>
+            <Link to="/community" className="flex items-center space-x-1 text-wellmatch-dark hover:text-wellmatch-primary transition-colors">
+              <Users size={20} />
+              <span>Community</span>
             </Link>
           </div>
 
