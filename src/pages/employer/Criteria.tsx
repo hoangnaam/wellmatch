@@ -11,7 +11,8 @@ import { useState } from "react";
 interface CriteriaSheet {
   id: string;
   position: string;
-  skills: string[];
+  technicalSkills: string[];
+  softSkills: string[];
   experience: number;
   education: string[];
 }
@@ -22,14 +23,16 @@ const Criteria = () => {
     {
       id: "1",
       position: "Frontend Developer",
-      skills: ["JavaScript", "React", "TypeScript"],
+      technicalSkills: ["JavaScript", "React", "TypeScript"],
+      softSkills: ["Teamwork", "Communication", "Problem Solving"],
       experience: 3,
       education: ["Bachelor's Degree"]
     },
     {
       id: "2",
       position: "Backend Developer",
-      skills: ["Node.js", "Python", "SQL"],
+      technicalSkills: ["Node.js", "Python", "SQL"],
+      softSkills: ["Leadership", "Time Management", "Adaptability"],
       experience: 4,
       education: ["Master's Degree"]
     }
@@ -39,7 +42,8 @@ const Criteria = () => {
     const newSheet: CriteriaSheet = {
       id: Date.now().toString(),
       position: "New Position",
-      skills: [],
+      technicalSkills: [],
+      softSkills: [],
       experience: 0,
       education: []
     };
@@ -121,20 +125,52 @@ const Criteria = () => {
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-6">
+                {/* Technical Skills Section */}
                 <div className="space-y-4">
-                  <h3 className="font-medium">Required Skills</h3>
+                  <h3 className="font-medium">Required Technical Skills</h3>
                   <div className="grid md:grid-cols-3 gap-4">
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="skill1" />
-                      <label htmlFor="skill1">JavaScript</label>
+                      <Checkbox id="tech1" />
+                      <label htmlFor="tech1">JavaScript</label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="skill2" />
-                      <label htmlFor="skill2">React</label>
+                      <Checkbox id="tech2" />
+                      <label htmlFor="tech2">React</label>
                     </div>
                     <div className="flex items-center space-x-2">
-                      <Checkbox id="skill3" />
-                      <label htmlFor="skill3">Node.js</label>
+                      <Checkbox id="tech3" />
+                      <label htmlFor="tech3">Node.js</label>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Soft Skills Section */}
+                <div className="space-y-4">
+                  <h3 className="font-medium">Required Soft Skills</h3>
+                  <div className="grid md:grid-cols-3 gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="soft1" />
+                      <label htmlFor="soft1">Teamwork</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="soft2" />
+                      <label htmlFor="soft2">Communication</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="soft3" />
+                      <label htmlFor="soft3">Problem Solving</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="soft4" />
+                      <label htmlFor="soft4">Leadership</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="soft5" />
+                      <label htmlFor="soft5">Time Management</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox id="soft6" />
+                      <label htmlFor="soft6">Adaptability</label>
                     </div>
                   </div>
                 </div>
